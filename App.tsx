@@ -13,8 +13,15 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
+  Image,
+  Pressable,
+  ImageBackground,
+  TouchableOpacity,
+  Button,
+  Alert,
 } from 'react-native';
 
 import {
@@ -25,93 +32,116 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function App(): JSX.Element {
+  const onPress = async () => {
+    Alert.alert('Ассаламу алейкум');
+  };
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('./assets/fon.png')}
+        resizeMode="cover"
+        style={styles.image}>
+        <Text style={styles.textStaca}>Staca</Text>
+        <Text style={styles.GettingStarted}>Getting Started</Text>
+        <Text style={styles.GettingStartedGetting}>
+          Getting Started Getting
+        </Text>
+        <Text style={styles.restMusicApp}>Rest music app</Text>
+
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Text style={styles.buttonText}> Let` go</Text>
+          <Image
+            style={styles.musicIcon}
+            source={require('./assets/Vector.png')}></Image>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+/*
+<Text style={styles.buttonText}> Let` go</Text>
+        <Image style={styles.musicIcon} source={require('./assets/Vector.png')}></Image>
+*/
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItem: 'center',
+    position: 'relative',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+
+  GettingStarted: {
+    fontSize: 32,
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '45%',
+    fontWeight: 'bold',
+    fontFamily: 'CenturyGothic',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+
+  GettingStartedGetting: {
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '52%',
+    fontFamily: 'CenturyGothic',
+    fontWeight: 'regular',
+    fontSize: 15,
   },
-  highlight: {
-    fontWeight: '700',
+
+  textStaca: {
+    fontFamily: 'CenturyGothic',
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '5%',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+
+  restMusicApp: {
+    fontSize: 10,
+    fontFamily: 'CenturyGothic',
+
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '3%',
+  },
+
+  button: {
+    position: 'relative',
+    alignSelf: 'center',
+    backgroundColor: '#966AEF',
+    shadowOpacity: 1,
+    height: 69,
+    width: 200,
+    borderRadius: 20,
+    top: 100,
+  },
+
+  buttonText: {
+    top: 19,
+    left: 60,
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'CenturyGothic',
+  },
+
+  musicIcon: {
+    top: -5,
+    left: 140,
+  },
+
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 50,
   },
 });
 
