@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -17,8 +10,8 @@ import {
   useColorScheme,
   View,
   Image,
-  Pressable,
   ImageBackground,
+  Pressable,
   TouchableOpacity,
   Button,
   Alert,
@@ -32,9 +25,19 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-function App(): JSX.Element {
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+
+const Stack = createNativeStackNavigator();
+
+
+
+function StartScreen({navigation}): JSX.Element {
   const onPress = async () => {
-    Alert.alert('Ассаламу алейкум');
+    navigation.navigate('Screen2');
   };
   return (
     <View style={styles.container}>
@@ -60,17 +63,53 @@ function App(): JSX.Element {
   );
 }
 
-/*
-<Text style={styles.buttonText}> Let` go</Text>
-        <Image style={styles.musicIcon} source={require('./assets/Vector.png')}></Image>
-*/
+function SecondScreen({navigation}): JSX.Element {
+  return (
+    <TouchableOpacity
+      style={styles.backToHome}
+      onPress={() => navigation.navigate('Screen1')}>
+      <Image
+        // style={styles.backToHome}
+        source={require('./assets/left-md.png')}></Image>
+    </TouchableOpacity>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Screen1"
+          component={StartScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Screen2"
+          component={SecondScreen}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItem: 'center',
-    position: 'relative',
+    backgroundColor: 'grey',
+    paddingTop: 10,
+  },
+
+  backToHome: {
+    position: 'absolute',
+    top: 44,
+    marginLeft: 25,
+  },
+
+  image: {
+    flex: 1,
   },
 
   GettingStarted: {
@@ -115,13 +154,13 @@ const styles = StyleSheet.create({
 
   button: {
     position: 'relative',
-    alignSelf: 'center',
     backgroundColor: '#966AEF',
-    shadowOpacity: 1,
     height: 69,
     width: 200,
     borderRadius: 20,
-    top: 100,
+    top: '62%',
+    left: '25%',
+    bottom: '28%',
   },
 
   buttonText: {
@@ -136,12 +175,6 @@ const styles = StyleSheet.create({
   musicIcon: {
     top: -5,
     left: 140,
-  },
-
-  image: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 50,
   },
 });
 

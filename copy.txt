@@ -1,0 +1,380 @@
+import * as React from 'react';
+import type {PropsWithChildren} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  useColorScheme,
+  View,
+  Image,
+  Pressable,
+  ImageBackground,
+  TouchableOpacity,
+  Button,
+  Alert,
+} from 'react-native';
+
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+function StartScreen({navigation}): JSX.Element {
+  const onPress = async () => {
+    navigation.navigate('Screen2');
+  };
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('./assets/fon.png')}
+        resizeMode="cover"
+        style={styles.image}>
+        <Text style={styles.textStaca}>Staca</Text>
+        <Text style={styles.GettingStarted}>Getting Started</Text>
+        <Text style={styles.GettingStartedGetting}>
+          Getting Started Getting
+        </Text>
+        <Text style={styles.restMusicApp}>Rest music app</Text>
+
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Text style={styles.buttonText}> Let` go</Text>
+          <Image
+            style={styles.musicIcon}
+            source={require('./assets/Vector.png')}></Image>
+        </TouchableOpacity>
+      </ImageBackground>
+    </View>
+  );
+}
+
+function SecondScreen({navigation}): JSX.Element {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('./assets/fonLogIn.png')}
+        resizeMode="cover"
+        style={styles.image}>
+        <Text style={styles.letsGetYouIn}>Let`s get you in</Text>
+
+        <TouchableOpacity style={styles.backToHome} onPress={() => navigation.navigate('Screen1')}>
+          <Image
+            // style={styles.backToHome}
+            source={require('./assets/left-md.png')}></Image>
+        </TouchableOpacity>
+        
+
+        <TouchableOpacity
+          style={styles.buttonGoogle}
+          onPress={() => Alert.alert('Ви вошли в Гугал')}>
+          <Image
+            style={styles.buttonGooglePic}
+            source={require('./assets/GooglePic.png')}></Image>
+          <Text style={styles.buttonGoogleText}> Continue with Google </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttonFacebook}
+          onPress={() => Alert.alert('Ви вашли в ЛицоКнигу')}>
+          <Image
+            style={styles.buttonFacebookPic}
+            source={require('./assets/FacebookPic.png')}></Image>
+          <Text style={styles.buttonGoogleText}> Continue with Facebook </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttonApple}
+          onPress={() => Alert.alert('Ви вашли в Бяблочко')}>
+          <Image
+            style={styles.buttonApplePic}
+            source={require('./assets/ApplePic.png')}></Image>
+          <Text style={styles.buttonGoogleText}> Continue with Apple </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttonLogIn}
+          onPress={() => Alert.alert('У вас  таки есть пароль??')}>
+          <Text style={styles.buttonLogInText}>Log in with a password</Text>
+        </TouchableOpacity>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: 10,
+          }}>
+          <View style={styles.lineLeft} />
+          <View style={styles.lineRight} />
+        </View>
+        <View>
+          <Text style={styles.or}> or </Text>
+          <Text style={styles.signUpText}>Don't have an account? Sign Up</Text>
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Screen1"
+          component={StartScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Screen2"
+          component={SecondScreen}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+
+  signUpText: {
+    position: 'relative',
+    bottom: 9,
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'CenturyGothic',
+    top: 100,
+  },
+
+  buttonLogIn: {
+    backgroundColor: '#9668EF',
+    overflow: 'hidden',
+    height: 65,
+    width: 300,
+    top: 120,
+    bottom: 200,
+    left: 45,
+    borderRadius: 11,
+  },
+
+  buttonLogInText: {
+    top: 19,
+    left: 50,
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'CenturyGothic',
+  },
+
+  or: {
+    color: 'white',
+    alignSelf: 'center',
+    paddingHorizontal: 5,
+    fontSize: 14,
+    top: -22,
+    fontFamily: 'CenturyGothic',
+  },
+
+  lineLeft: {
+    backgroundColor: 'white',
+    width: 140,
+    height: 2,
+  },
+
+  lineRight: {
+    backgroundColor: 'white',
+    width: 140,
+    height: 2,
+  },
+
+  buttonGoogleText: {
+    position: 'relative',
+    bottom: 9,
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'CenturyGothic',
+  },
+
+  buttonFacebooktext: {
+    position: 'relative',
+    bottom: 9,
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'CenturyGothic',
+  },
+
+  buttonAppleText: {
+    position: 'relative',
+    bottom: 9,
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'CenturyGothic',
+  },
+
+  buttonGooglePic: {
+    resizeMode: 'contain',
+    height: 30,
+    width: 30,
+    left: 35,
+    top: 15,
+  },
+
+  buttonFacebookPic: {
+    resizeMode: 'contain',
+    height: 30,
+    width: 30,
+    left: 35,
+    top: 15,
+  },
+
+  buttonApplePic: {
+    resizeMode: 'contain',
+    height: 30,
+    width: 30,
+    left: 35,
+    top: 15,
+  },
+
+  buttonGoogle: {
+    position: 'relative',
+    alignSelf: 'center',
+    bottom: '14%',
+    backgroundColor: '#322251',
+    height: 59,
+    width: '90%',
+    borderRadius: 10,
+    top: 214,
+  },
+
+  buttonFacebook: {
+    position: 'relative',
+    alignSelf: 'center',
+    bottom: '12%',
+    backgroundColor: '#322251',
+    height: 59,
+    width: '90%',
+    borderRadius: 10,
+    top: 293,
+  },
+
+  buttonApple: {
+    position: 'relative',
+    alignSelf: 'center',
+    bottom: '14%',
+    backgroundColor: '#322251',
+    overflow: 'hidden',
+    shadowColor: 'black',
+    shadowRadius: 10,
+    shadowOpacity: 1,
+    height: 59,
+    width: '90%',
+    borderRadius: 10,
+    top: 50,
+  },
+
+  letsGetYouIn: {
+    fontSize: 26,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    alignSelf: 'center',
+    top: 145,
+    fontFamily: 'CenturyGothicBold',
+  },
+
+  backToHome: {
+    position: 'absolute',
+    top: 44,
+    marginLeft: 25,
+  },
+
+  GettingStarted: {
+    fontSize: 32,
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '45%',
+    fontWeight: 'bold',
+    fontFamily: 'CenturyGothic',
+  },
+
+  GettingStartedGetting: {
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '52%',
+    fontFamily: 'CenturyGothic',
+    fontWeight: 'regular',
+    fontSize: 15,
+  },
+
+  textStaca: {
+    fontFamily: 'CenturyGothic',
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '5%',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+
+  restMusicApp: {
+    fontSize: 10,
+    fontFamily: 'CenturyGothic',
+
+    color: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '3%',
+  },
+
+  button: {
+    position: 'relative',
+    backgroundColor: '#966AEF',
+    height: 69,
+    width: 200,
+    borderRadius: 20,
+    top: '62%',
+    left: '25%',
+  },
+
+  buttonText: {
+    top: 19,
+    left: 60,
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'CenturyGothic',
+  },
+
+  musicIcon: {
+    top: -5,
+    left: 140,
+  },
+
+  image: {
+    flex: 1,
+  },
+});
+
+export default App;
